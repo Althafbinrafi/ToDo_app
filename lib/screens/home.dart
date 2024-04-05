@@ -130,9 +130,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void _handleToDoChange(ToDo todo) {
+  void _handleToDoChange(ToDo todo) async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
       todo.isDone = !todo.isDone;
+      prefs.setBool(
+          'todo_isDone_${todo.id}', todo.isDone); // Save the isDone state
     });
   }
 
